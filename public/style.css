@@ -1,0 +1,64 @@
+
+:root {
+  --bg: #000;
+  --text: #e5e5e5;
+  --muted: #a8a8a8;
+  --cyan: #21d3ee;
+  --red: #ff4d6d;
+  --panel: #0b0b0f;
+  --outline: #3c3c46;
+  --btn: #2a2a34;
+  --btn-hover: #3a3a46;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.app { width: 100%; max-width: 920px; padding: 12px; }
+.hidden { display: none; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 8px; }
+.brand { font-weight: 800; font-size: 24px; letter-spacing: 0.5px; }
+.muted { color: var(--muted); }
+
+.panel { background: var(--panel); border: 1px solid var(--outline); border-radius: 14px; padding: 20px; margin-top: 12px; }
+
+.roomList { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.roomCard { padding: 18px; border-radius: 12px; background: #111; color: var(--text); border: 1px solid var(--outline); cursor: pointer; text-align: left; }
+.roomCard:hover { background: #17171c; }
+
+.room-box input, .room-box select {
+  background: #111; color: var(--text); border: 1px solid var(--outline);
+  border-radius: 8px; padding: 8px 10px; margin-right: 6px;
+}
+.roundsLabel { margin-right: 6px; color: var(--muted); }
+.room-box button, button { background: var(--btn); color: var(--text); border: 1px solid var(--outline); border-radius: 10px; padding: 10px 14px; cursor: pointer; }
+button:hover { background: var(--btn-hover); }
+
+.card { background: #111318; border: 1px solid var(--outline); padding: 16px; border-radius: 12px; }
+.card input { width: 100%; background: #0c0f14; color: var(--text); border: 1px solid var(--outline); border-radius: 8px; padding: 10px; margin: 6px 0 12px; }
+
+.word { text-align: center; margin: 24px 0 8px; font-size: 28px; letter-spacing: 6px; }
+.mistakes { text-align: center; margin-bottom: 12px; }
+
+.keyboard { display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px; max-width: 640px; margin: 0 auto; }
+.key { display: inline-flex; align-items: center; justify-content: center; height: 44px; border-radius: 999px; border: 2px solid #e5e5e5; color: #e5e5e5; cursor: pointer; user-select: none; }
+.key.used { opacity: .7; }
+.key.right { border-color: var(--cyan); color: var(--cyan); }
+.key.wrong { border-color: var(--red); color: var(--red); }
+
+.hintBtn { display: block; margin: 16px auto 0; }
+.hintText { text-align: center; color: var(--muted); margin-top: 8px; }
+
+#players { display: flex; gap: 10px; flex-wrap: wrap; }
+.pill { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--outline); background: #111; color: var(--text); }
+
+.resultText { text-align: center; font-size: 20px; margin: 10px 0 16px; white-space: pre-line; }
+.winner { text-align: center; margin-top: 10px; font-size: 18px; color: var(--cyan); font-weight: 700; }

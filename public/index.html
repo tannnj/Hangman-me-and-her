@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">Mwah princess</div>
+    </header>
+
+    <main id="view">
+      <!-- Room list -->
+      <section id="rooms" class="panel">
+        <h2>Choose a room</h2>
+        <div class="roomList">
+          <button id="joinRoomBtn" class="roomCard">our little game</button>
+        </div>
+        <p class="muted">Click the room to join, then enter your name.</p>
+      </section>
+
+      <!-- Name + rounds + join -->
+      <section id="join" class="panel hidden">
+        <h2>Join room: <span class="muted">our little game</span></h2>
+        <div class="room-box">
+          <input id="playerName" maxlength="20" placeholder="Your name" />
+          <label for="roundsSel" class="roundsLabel">Rounds:</label>
+          <select id="roundsSel" title="Rounds">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <button id="joinBtn">Join</button>
+        </div>
+      </section>
+
+      <!-- Lobby -->
+      <section id="lobby" class="panel hidden">
+        <h2>Lobby</h2>
+        <div id="players"></div>
+        <div class="muted">Select rounds, then both players click "I'm Ready".</div>
+        <button id="readyBtn">I'm Ready</button>
+      </section>
+
+      <!-- Word Entry -->
+      <section id="entry" class="panel hidden">
+        <h2 id="entryTitle">Enter your word and hint</h2>
+        <div class="card">
+          <label>Word (max 16 chars)</label>
+          <input id="wordInput" maxlength="16" placeholder="Enter word" />
+          <label>Hint (max 120 chars)</label>
+          <input id="hintInput" maxlength="120" placeholder="Optional hint" />
+          <button id="playBtn">PLAY</button>
+          <p class="muted">Both players are entering at the same time…</p>
+        </div>
+      </section>
+
+      <!-- Game Board -->
+      <section id="board" class="panel hidden">
+        <h2 id="turnTitle">Your turn</h2>
+        <div class="word">
+          <span id="mask"></span>
+        </div>
+        <div class="mistakes">Mistakes: <span id="mistakes">0</span>/<span id="maxMistakes">6</span></div>
+        <div id="kbd" class="keyboard"></div>
+        <button id="hintBtn" class="hintBtn">See Hint</button>
+        <div id="hintText" class="hintText"></div>
+      </section>
+
+      <!-- Result -->
+      <section id="result" class="panel hidden">
+        <div id="resultText" class="resultText"></div>
+        <button id="nextBtn">NEXT</button>
+      </section>
+
+      <!-- Finished -->
+      <section id="finished" class="panel hidden">
+        <h2>Match finished</h2>
+        <div id="scoreBoard"></div>
+        <div id="winnerText" class="winner"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
