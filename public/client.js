@@ -1,4 +1,4 @@
-// public/client.js — client with single clickable room "our little game"
+
 const $ = (s) => document.querySelector(s);
 const view = {
   rooms: $('#rooms'),
@@ -42,10 +42,28 @@ const nextBtn = $('#nextBtn');
 const scoreBoard = $('#scoreBoard');
 const winnerText = $('#winnerText');
 
-joinRoomBtn.onclick = () => {
-  show('join');
-};
+const chatToggle = $('#chatToggle');
+const chatPanel = $('#chat');
+const chatClose = $('#chatClose');
+const chatMessages = $('#chatMessages');
+const chatInput = $('#chatInput');
+const chatSend = $('#chatSend');
 
+chatToggle.onclick = () => chatPanel.classList.toggle('hidden');
+chatClose.onclick = () => chatPanel.classList.add('hidden');
+
+chatSend.onclick = sendChat;
+chatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') sendChat();
+});
+function sendChat() {
+  const txt = (chatInput.value || '').trim();
+  if (!txt) return;
+  socket.emit('chatSend', txt);
+  chatInput.value = '';
+}
+
+joinRoomBtn.onclick = () => { show('join'); };
 joinBtn.onclick = () => {
   const nm = (nameInput.value || '').trim() || 'Player';
   socket.emit('joinRoom', { roomKey: 'our-little-game', name: nm });
@@ -133,4 +151,30 @@ function setBoard(round, info) {
     keyboardEl.appendChild(key);
   }
   hintText.textContent = '';
+}
+
+// Chat events
+socket.on('chatHistory', (items) => {
+  chatMessages.innerHTML = '';
+  items.forEach(addMsg);
+  chatScroll();
+});
+socket.on('chatMessage', (msg) => {
+  addMsg(msg);
+  chatScroll();
+});
+
+function addMsg({name, text, ts}) {
+  const div = document.createElement('div');
+  div.className = 'msg';
+  if (name === 'System') {
+    div.innerHTML = `<span class="sys">[${new Date(ts).toLocaleTimeString()}] ${text}</span>`;
+  } else {
+    div.innerHTML = `<span class="who">${name}:</span> <span class="txt">${escapeHtml(text)}</span>`;
+  }
+  chatMessages.appendChild(div);
+}
+function chatScroll() { chatMessages.scrollTop = chatMessages.scrollHeight; }
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }

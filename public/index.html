@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +11,10 @@
   <div class="app">
     <header class="topbar">
       <div class="brand">Mwah princess</div>
+      <button id="chatToggle" class="chatToggle">Chat</button>
     </header>
 
     <main id="view">
-      <!-- Room list -->
       <section id="rooms" class="panel">
         <h2>Choose a room</h2>
         <div class="roomList">
@@ -22,7 +23,6 @@
         <p class="muted">Click the room to join, then enter your name.</p>
       </section>
 
-      <!-- Name + rounds + join -->
       <section id="join" class="panel hidden">
         <h2>Join room: <span class="muted">our little game</span></h2>
         <div class="room-box">
@@ -39,7 +39,6 @@
         </div>
       </section>
 
-      <!-- Lobby -->
       <section id="lobby" class="panel hidden">
         <h2>Lobby</h2>
         <div id="players"></div>
@@ -47,7 +46,6 @@
         <button id="readyBtn">I'm Ready</button>
       </section>
 
-      <!-- Word Entry -->
       <section id="entry" class="panel hidden">
         <h2 id="entryTitle">Enter your word and hint</h2>
         <div class="card">
@@ -60,33 +58,39 @@
         </div>
       </section>
 
-      <!-- Game Board -->
       <section id="board" class="panel hidden">
         <h2 id="turnTitle">Your turn</h2>
-        <div class="word">
-          <span id="mask"></span>
-        </div>
+        <div class="word"><span id="mask"></span></div>
         <div class="mistakes">Mistakes: <span id="mistakes">0</span>/<span id="maxMistakes">6</span></div>
         <div id="kbd" class="keyboard"></div>
         <button id="hintBtn" class="hintBtn">See Hint</button>
         <div id="hintText" class="hintText"></div>
       </section>
 
-      <!-- Result -->
       <section id="result" class="panel hidden">
         <div id="resultText" class="resultText"></div>
         <button id="nextBtn">NEXT</button>
       </section>
 
-      <!-- Finished -->
       <section id="finished" class="panel hidden">
         <h2>Match finished</h2>
         <div id="scoreBoard"></div>
         <div id="winnerText" class="winner"></div>
       </section>
     </main>
-  </div>
 
+    <aside id="chat" class="chat hidden">
+      <div class="chatHeader">
+        <div>Chat</div>
+        <button id="chatClose" class="chatClose">×</button>
+      </div>
+      <div id="chatMessages" class="chatMessages"></div>
+      <div class="chatInputRow">
+        <input id="chatInput" maxlength="400" placeholder="Type a message…" />
+        <button id="chatSend">Send</button>
+      </div>
+    </aside>
+  </div>
   <script src="/socket.io/socket.io.js"></script>
   <script src="client.js"></script>
 </body>
